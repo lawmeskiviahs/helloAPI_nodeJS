@@ -1,0 +1,40 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - git remote set-url origin $REPO_URL
+      - git fetch origin
+      - curl $TAG_SCRIPT -o tag-release.sh
+      - . ./tag-release.sh
+      - pip3 install awscli --upgrade --user
+      - echo Logging in to Amazon ECR...
+      - aws --version
+      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+      - REPOSITORY_URI=$ECR_URL
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=$MAJOR.$MINOR.$PATCH
+      - if [ "$ENV" -eq "QA" ]; then IMAGE_TAG="${IMAGE_TAG}.snapshot"; fi
+  build:
+    commands:
+      - pip install requests
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - cd deployment  
+      - docker build -f Dockerfile .. -t $REPOSITORY_URI:latest 
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+      - git push origin $NEW_TAG
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker images...
+      #- docker push $REPOSITORY_URI:latest
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - echo Writing image definitions file...
+      - cd ..
+      - printf '[{"name":"user-http","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - printf '[{"name":"user-grpc","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions-grpc.json
+artifacts:
+    files:
+    - imagedefinitions.json
+    - imagedefinitions-grpc.json

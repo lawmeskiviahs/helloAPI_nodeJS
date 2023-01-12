@@ -1,0 +1,592 @@
+openapi: 3.0.1
+info:
+  title: admin-module
+  description: Admin Microservice
+  version: 1.0.0
+servers:
+  - url: /api/v1
+tags:
+  - name: Admin Services
+    description: Simple user opearations
+  - name: OTP Services
+    description: Simple otp opearations
+
+paths:
+  /login:
+    post:
+      # parameters:
+      #   - in: header
+      #     name: auth_token
+      #     schema:
+      #       type: string
+      #     required: true
+      #     allowReserved: true
+      tags:
+        - Admin Services
+      description: Admin login
+      requestBody:
+        description: Username and password body params required
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdminLoginSchema"
+        required: true
+      responses:
+        200:
+          description: Returns a specific user by id
+          content: {}
+  /user/delete:
+    delete:
+      parameters:
+        - in: header
+          name: auth_token
+          schema:
+            type: string
+          required: true
+          allowReserved: true
+      tags:
+        - User Services
+      description: Delete user data by id
+      responses:
+        200:
+          description: Returns success response
+          content: {}
+  /user/userlist:
+    get:
+      parameters:
+        - in: header
+          name: auth_token
+          schema:
+            type: string
+          required: true
+          allowReserved: true
+        - in: query
+          name: lastKey
+          schema:
+            type: string
+        - in: query
+          name: limit
+          schema:
+            type: number
+          required: true
+          allowReserved: true
+      tags:
+        - User Services
+      description: Get user data by id
+      responses:
+        200:
+          description: Returns a specific user by id
+          content: {}
+  /user/update:
+    put:
+      parameters:
+        - in: header
+          name: auth_token
+          schema:
+            type: string
+          required: true
+          allowReserved: true
+      tags:
+        - User Services
+      description: Simple user updation
+      requestBody:
+        description: User firstName, lastName, middleName, dob, & picture.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserBody"
+        required: true
+      responses:
+        200:
+          description: Returns a success message
+          content: {}
+  /user/verify-mobile-number:
+    post:
+      parameters:
+        - in: header
+          name: auth_token
+          schema:
+            type: string
+          required: true
+          allowReserved: true
+      tags:
+        - User Services
+      description: Simple mobile number authentication
+      requestBody:
+        description: Mobile number, tokenId, & otp
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VerifyMobileNumber"
+        required: true
+      responses:
+        200:
+          description: Returns a success message
+          content: {}
+  /user/username:
+    patch:
+      parameters:
+        - in: header
+          name: auth_token
+          schema:
+            type: string
+          required: true
+          allowReserved: true
+      tags:
+        - User Services
+      description: Simple user updation of username
+      requestBody:
+        description: User username.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserNameBody"
+        required: true
+      responses:
+        200:
+          description: Returns a success message
+          content: {}
+  /user/displayname:
+    patch:
+      parameters:
+        - in: header
+          name: auth_token
+          schema:
+            type: string
+          required: true
+          allowReserved: true
+      tags:
+        - User Services
+      description: Simple user updation of displayName
+      requestBody:
+        description: User displayName.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateDisplayNameBody"
+        required: true
+      responses:
+        200:
+          description: Returns a success message
+          content: {}
+  /user/matches:
+    get:
+      parameters:
+        - in: header
+          name: auth_token
+          schema:
+            type: string
+          required: true
+          allowReserved: true
+      tags:
+        - User Services
+      description: get Completed matches of particular User
+      responses:
+        200:
+          description: Returns a success message with matches
+          content: {}
+  /otp/request-otp:
+    post:
+      parameters:
+        - in: header
+          name: auth_token
+          schema:
+            type: string
+          required: true
+          allowReserved: true
+      tags:
+        - OTP Services
+      description: Simple otp authentication
+      requestBody:
+        description: Mobile number
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RequestOTP"
+        required: true
+      responses:
+        200:
+          description: Returns otpId with success message
+          content: {}
+  /otp/verify-otp:
+    post:
+      parameters:
+        - in: header
+          name: auth_token
+          schema:
+            type: string
+          required: true
+          allowReserved: true
+      tags:
+        - OTP Services
+      description: Simple otp authentication
+      requestBody:
+        description: mobileNumber, tokenId, & otp
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VerifyOTP"
+        required: true
+      responses:
+        200:
+          description: Returns a success message
+          content: {}
+  /user/password-update:
+    post:
+      parameters:
+        - in: header
+          name: auth_token
+          schema:
+            type: string
+          required: true
+          allowReserved: true
+      tags:
+        - User Services
+      description: Update user password when logged in
+      requestBody:
+        description: existingPassword, newPassword, & confirmNewPassword
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePasswordRef"
+        required: true
+      responses:
+        200:
+          description: Returns a success message
+          content: {}
+  /profile/trades/{trade_type}/{limit}/{offset}/{active_bids}:
+    get:
+      parameters:
+        - in: header
+          name: auth_token
+          schema:
+            type: string
+          required: true
+          allowReserved: true
+        - in: path
+          name: trade_type
+          schema:
+            type: string
+          required: true
+          description: It can be ask/bid
+        - in: path
+          name: limit
+          schema:
+            type: integer
+          required: true
+          description: It can be any number
+        - in: path
+          name: offset
+          schema:
+            type: integer
+          required: true
+          description: It can be any number
+        - in: path
+          name: active_bids
+          schema:
+            type: string
+          required: true
+          description: It can be a boolean
+      tags:
+        - User Profile
+      description: Secondary GRPC call
+      responses:
+        200:
+          description: Returns a success message
+          content: {}
+  /profile/trades/count:
+    post:
+      parameters:
+        - in: header
+          name: auth_token
+          schema:
+            type: string
+          required: true
+          allowReserved: true
+      tags:
+        - User Profile
+      description: Secondary,NFT GRPC call to fetch user's total trades
+      requestBody:
+        description: currency
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/userProfileTradesCount"
+      responses:
+        200:
+          description: Returns a success message
+          content: {}
+  /profile/trades-recent/{limit}/{offset}:
+    post:
+      parameters:
+        - in: header
+          name: auth_token
+          schema:
+            type: string
+          required: true
+          allowReserved: true
+        - in: path
+          name: limit
+          schema:
+            type: integer
+          required: true
+          description: It can be any number
+        - in: path
+          name: offset
+          schema:
+            type: integer
+          required: true
+          description: It can be any number
+      tags:
+        - User Profile
+      description: Secondary recent trades GRPC call
+      requestBody:
+        description: user id
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/userRecentTrades"
+      responses:
+        200:
+          description: Returns a success message
+          content: {}
+  /profile/cards:
+    post:
+      parameters:
+        - in: header
+          name: auth_token
+          schema:
+            type: string
+          required: true
+          allowReserved: true
+      tags:
+        - Search Service
+      description: Get Player cards
+      requestBody:
+        description: List of player cards
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SearchPlayerReqBody"
+        required: true
+      responses:
+        200:
+          description: Returns success response
+          content: {}
+  /profile/searchFilters:
+    get:
+      parameters:
+        - in: header
+          name: auth_token
+          schema:
+            type: string
+          required: true
+          allowReserved: true
+      tags:
+        - recent activity
+      description: Getting Search options
+      responses:
+        200:
+          description: Returns success response
+          content: {}
+components:
+  schemas:
+    AdminLoginSchema:
+      title: Admin Login
+      required:
+        - username
+        - password
+      type: object
+      properties:
+        username:
+          type: string
+          example: "user@domain.com"
+        password:
+          type: string
+          example: "3224ghg4@234c424cc42"
+    UpdateUserBody:
+      title: Update User
+      type: object
+      properties:
+        username:
+          type: string
+          example: "demo"
+        profilePicture:
+          type: string
+          example: "https://pic/demo.com"
+        dateOfBirth:
+          type: string
+          example: "mm/dd/yyyy"
+    VerifyOTP:
+      title: Verify OTP
+      required:
+        - tokenId
+        - otp
+      type: object
+      properties:
+        tokenId:
+          type: string
+          example: "3224ghg4-23hg-234c-424cc42"
+        otp:
+          type: string
+          example: "12345"
+    RequestOTP:
+      title: Request OTP
+      required:
+        - mobileNumber
+      type: object
+      properties:
+        mobileNumber:
+          type: string
+          example: "9999999999"
+    VerifyMobileNumber:
+      title: Add mobile Number
+      required:
+        - tokenId
+        - otp
+        - mobileNumber
+      type: object
+      properties:
+        mobileNumber:
+          type: string
+          example: "9999999999"
+        tokenId:
+          type: string
+          example: "3224ghg4-23hg-234c-424cc42"
+        otp:
+          type: string
+          example: "12345"
+    UpdatePasswordRef:
+      title: Update user password
+      required:
+        - existingPassword
+        - newPassword
+        - confirmNewPassword
+      type: object
+      properties:
+        existingPassword:
+          type: string
+          example: "User@1234"
+        newPassword:
+          type: string
+          example: "User@12345"
+        confirmNewPassword:
+          type: string
+          example: "User@12345"
+    userProfileTradesCount:
+      title: Fetch user trades, cards data for - User Profile
+      required:
+        - currency
+        - otherUserId
+      type: object
+      properties:
+        currency:
+          type: string
+          example: "TRADECOIN/INR"
+        otherUserId:
+          type: string
+          example: "90aa2ff0-2167-4f06-9c33-3218ea2d286e"
+    # SecondaryGrpc:
+    #   trade_type: It can be ask/bid
+    #   required: true
+    #   type: string
+    # properties:
+    #   mobileNumber:
+    #     type: string
+    #     example: "9999999999"
+    #   tokenId:
+    #     type: string
+    #     example: "3224ghg4-23hg-234c-424cc42"
+    #   otp:
+    #     type: string
+    #     example: "12345"
+    userRecentTrades:
+      title: Fetch user recent trades - User Profile
+      required:
+        - otherUserId
+        - filterPrimary
+        - filterSecondary
+        - filterCraft
+        - filterFantasy
+      type: object
+      properties:
+        otherUserId:
+          type: string
+          example: "90aa2ff0-2167-4f06-9c33-3218ea2d286e"
+        filterPrimary:
+          type: array
+          example: ["bundle_purchased"]
+        filterSecondary:
+          type: array
+          example: ["buyer", "seller"]
+        filterCraft:
+          type: array
+          example: ["card_crafted"]
+        filterFantasy:
+          type: array
+          example: ["fantasy_match"]
+    UpdateUserNameBody:
+      title: Update user displayName
+      required:
+        - username
+      type: object
+      properties:
+        username:
+          type: string
+          example: "Username@1234"
+    UpdateDisplayNameBody:
+      title: Update user displayName
+      required:
+        - displayName
+      type: object
+      properties:
+        displayName:
+          type: string
+          example: "Firstname LastName"
+    SearchPlayerReqBody:
+      title: PlayerHistoryMetaDataBody
+      required:
+        - search
+        - player
+        - rarity
+        - format
+        - userId
+      type: object
+      properties:
+        search:
+          type: string
+          example: "virat kohli"
+        player:
+          type: array
+          example:
+            [
+              "13049448-aff8-488b-8dce-ca463869eff5",
+              "9c0ecb0c-0ec4-4f2c-9a8a-de13721d74ef",
+            ]
+        rarity:
+          type: array
+          example: ["COMMON", "UNIQUE"]
+        format:
+          type: array
+          example: ["ODI", "TEST"]
+        userId:
+          type: string
+          example: "ryrry5"
+        date:
+          type: object
+          properties:
+            from:
+              type: string
+              example: "2021-06-16T20:48:09.000Z"
+            to:
+              type: string
+              example: "2021-06-16T20:48:09.000Z"
+        limit:
+          type: number
+          example: 10
+        offset:
+          type: number
+          example: 0
+        order:
+          type: array
+          example: []

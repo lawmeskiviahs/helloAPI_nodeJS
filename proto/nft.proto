@@ -1,0 +1,1163 @@
+syntax = "proto3";
+
+message CollectionsCreateReq {
+    string name = 1;
+    string description=2;
+    string logo = 3;
+    string banner = 4;
+    string featuredImage = 5;
+    string royalty = 6;
+    string collectionUrl = 7;
+    string externalLink = 8;
+    int32 blockChainId = 9;
+    string categoryId = 10;
+    bool sensitiveContent = 11;
+    string creator = 12;
+}
+
+message CollectionsCreateResp {
+    bool error= 1;
+    string message=2;
+    SingleCollectionData data = 3;
+}
+
+message SingleCollectionData {
+    string collectionId = 1;
+    string name = 2;
+    string description=3;
+    string logo = 4;
+    string banner = 5;
+    string featuredImage = 6;
+    int32 royalty = 7;
+    string collectionUrl = 8;
+    string externalLink = 9;
+    int32 blockChainId = 10;
+    string categoryId = 11;
+    bool sensitiveContent = 12;
+    string creatorId = 13;
+    bool isActive = 14;
+    int32 totalNft = 15;
+    string createdAt = 16;
+    string profileImage = 17;
+    string creator = 18;
+    bool isFeatured = 19;
+}
+
+message GetAllCollectionsReq {
+    int32 limit= 1;
+    int32 offset= 2;
+    string searchText = 3;
+    string sortBy = 4;
+    bool fromAdmin = 5;
+}
+
+message GetAllCollectionsResp {
+    bool error= 1;
+    string message=2;
+    AllCollections data = 3;
+}
+
+message AllCollections{
+    int32 count = 1;
+    repeated SingleCollectionData rows = 2;
+}
+
+message GetCollectionIdReq {
+    string collectionId = 1;
+}
+
+message GetCollectionNameReq {
+    string collectionName = 1;
+}
+
+message GetCollectionIdResp {
+    bool error= 1;
+    string message=2;
+    SingleCollectionData data = 3;
+}
+
+message UpdateCollectionIdReq {
+    string collectionId = 1;
+    string name = 2;
+    string description=3;
+    string logo = 4;
+    string banner = 5;
+    string featuredImage = 6;
+    string collectionUrl = 7;
+    string externalLink = 8;
+    int32 blockChainId = 9;
+    string categoryId = 10;
+    bool sensitiveContent = 11;
+    string creator = 12;
+    bool isActive = 13;
+    bool isFeatured = 14;
+}
+
+
+
+
+message GettingNFTCollectionItemReq {
+    string userId = 1;
+}
+message GettingNFTCollectionItemResp {
+    bool error= 1;
+    string message=2;
+    int32 nftCount=3;
+    int32 collectionCount=4;
+    int32 floorPrice=5;
+}
+message GettingNFTCollectionItemsReq {
+    string userId = 1;
+}
+message GettingNFTCollectionItemsResp {
+    bool error= 1;
+    string message=2;
+    int32 nftCount=3;
+    int32 collectionCount=4;
+    int32 floorPrice=5;
+}
+
+message GettingUnsoldNFTCollectionItemsReq {
+    string userId = 1;
+}
+message GettingUnsoldNFTCollectionItemsResp {
+    bool error= 1;
+    string message=2;
+    int32 nftCount=3;
+    int32 collectionCount=4;
+    int32 floorPrice=5;
+}
+
+message nftObj {
+    int32 nftId= 1;
+    int32 collectionId= 2;
+}
+
+message GetRaffelByNftIdReq {
+    int32 raffleId = 1;
+}
+
+message FindNFTbyIdForAdminReq {
+    int32 nftId = 1;
+}
+
+
+
+message NFTItemBulkCreateReq {
+   repeated NFTItemCreateReq data = 1;
+}
+
+message NFTItemBulkResp {
+    bool error= 1;
+    string message=2;
+    string title=3;
+}
+
+message NFTItemBulkCreateResp {
+   repeated NFTItemBulkResp success = 1;
+   repeated NFTItemBulkResp failed = 2;
+}
+
+message SingleNFTItemData {
+    string nftId = 1;
+    string nftAddress = 2;
+    string title = 3;
+    string description=4;
+    string tokenId = 5;
+    string copies = 6;
+    string owner=7;
+    string creator =8;
+    string collectionId = 9;
+    string collectionName = 10;
+    string fileType = 11;
+    string isWithdraw =12;
+    string isListed =13;
+    string createdAt =14;
+    bool sensitiveContent = 15;
+    repeated nftProperties properties = 16;
+    string signature = 17;
+    string duration = 18;
+    string salePrice = 19;
+    string expiredAt = 20;
+    string supply = 21;
+    string royalty = 22;
+    string networkId = 23;
+    string nftType = 24;
+    string price=25;
+    string minBidCost =26;
+    string currency = 27;
+    string status = 28;
+    string viewed = 30;
+    string isActive = 31;
+    string logo = 32;
+    string banner = 33;
+    string auctionExpireDate = 34;
+    string blockChainName = 35;
+    string nftEdition = 36;
+    string isSlod = 37;
+    string isIpfs = 38;
+    string isMint = 39;
+    string isFeatured=40;
+    string tokenUri = 41;
+    int32 totalListing = 42;
+}
+
+message GetAllNFTItemReq {
+  int32 limit = 1;
+    int32 offset = 2;
+    string searchText = 3;
+    string sortBy = 4;
+    bool fromAdmin = 5;
+}
+message GetAllNFTHistoryReq{
+    string userId = 1;
+    int32 limit = 2;
+    int32 page = 3;
+}
+
+message GetAllNFTItemResp {
+    string message = 1;
+    bool error = 2;
+    repeated getNftDatas data = 3;
+    int32 count = 4;
+}
+message getNftDatas {
+    string title = 1;
+    string nftType = 2;
+    string price=3;
+    string creator =4;
+    string createdAt =5;
+    string description=6;
+    string collectionName=7;
+}
+
+message AllNFTItem{
+    int32 count = 1;
+    repeated SingleNFTItemData rows = 2;
+}
+
+message GetNFTItemByCollectionIdReq {
+    int32 limit= 1;
+    int32 offset= 2;
+    string collectionId = 3;
+    string searchText = 4;
+    string sortBy = 5;
+    string year = 6;
+    bool owner = 7;
+}
+
+message GetNFTItemByCollectionIdResp {
+    bool error = 1;
+    string message=2;
+    NFTByCollection data = 3;
+}
+
+message NFTByCollection {
+    int32 count = 1;
+    repeated SingleNFTItemData rows = 2;
+}
+
+message UpdateNFTReq {
+    string title = 1;
+    string description=2;
+    string logo= 3;
+    string banner=4;
+    string royalty=5;
+    string blockChainName=6;
+    string location=7;
+    string fileType=8;
+    string watermarkUrl=9;
+    string copies=10;
+    int64 isActive = 11;
+    string nftType =12;
+    float price = 13;
+    float minBidCost = 14;
+    string nftId = 15;
+    string auctionExpireDate = 16;
+    string creator = 17;
+}
+
+message UpdateNFTResp {
+    bool error= 1;
+    string message=2;
+}
+
+message UpdatedNFTReq {
+    string title = 1;
+    string description = 2;
+    float price = 3;
+    NFTItemCreateLocation location = 4;
+    int64 collectionId = 5;
+    int64 royalty = 6;
+    int64 categoryId = 7;
+    int32 copies = 8;
+    string blockChainName = 9;
+    string creator = 10;
+    int64 nftId = 11;
+    repeated int32 extraoption = 12;
+}
+
+message UpdatedNFTResp {
+    bool error= 1;
+    string message=2;
+}
+
+message PurchaseNFTReq {
+    string userId = 1;
+    string fullname =2;
+    string email = 3;
+    int64 nftId = 4;
+    string paymentGateway = 5;
+}
+message CartCheckoutReq {
+    string userId = 1;
+    string fullname =2;
+    string email = 3;
+    repeated string nftId = 4;
+    string paymentGateway = 5;
+}
+
+message PurchaseNFTResp {
+    bool error= 1;
+    string message=2;
+}
+
+message GetNFTByUserReq {
+    string userId = 1;
+    int32 limit=2;
+    int32 offset=3;
+}
+
+message GetNFTByUserResp {
+    bool error= 1;
+    string message=2;
+    MyNFTResponse data = 3;
+}
+
+message MyNFTResponse {
+    CollectionList myCollection = 1;
+    map<string,string> mintedNft = 2;
+    map<string,string> favourite = 3;
+}
+
+message CollectionList {
+    int64 totalNFT = 1;
+    repeated SingleNFTItemData data = 2;
+}
+
+message PurchaseNFTStatusReq {
+    string userId = 1;
+    int64 nftId = 2;
+}
+
+message UpdateNFTTransactionStatusReq{
+    string userId = 1;
+    int64 nftId = 2;
+    string paymentOrderId = 3;
+    string status = 4;
+}
+
+message UpdateNFTTransactionStatusRes{
+    string message = 1;
+    bool error = 2;
+}
+
+message GetAllSoldNFTItemResp {
+    bool error= 1;
+    string message=2;
+    AllSoldNFTItem data = 3;
+}
+message GetAllNFTHistoryResp {
+    bool error= 1;
+    string message=2;
+    repeated HistoryParmeter data = 3;
+    int64 count= 4;
+}
+
+message HistoryParmeter {
+    int64 nftId= 1;
+    double price=2;
+    string status=3;
+    string createdAt=4;
+    string nftTitle=5;
+}
+
+message AllSoldNFTItem{
+    int32 count = 1;
+    repeated SingleSoldNFTItemData rows = 2;
+}
+
+message SingleSoldNFTItemData {
+    string userId = 1;
+    int32 nftId = 2;
+    string nftAddress = 3;
+    string title = 4;
+    string fileType = 5;
+    string tokenUri = 6;
+    int32 supply = 7;
+    string royalty = 8;
+    string networkId = 9;
+    string txid = 10;
+    string nftLogo = 11;
+    int32 collectionId = 12;
+    string brandName = 13;
+    string nftType = 14;
+    double amount = 15;
+    string currency = 16;
+    string paymentGateway = 17;
+    string status = 18;
+    string createdAt = 19;
+    string remarks = 20;
+    string auctionExpireDate = 21;
+    string paymentOrderId = 22;
+    string paymentGatewayId = 23;
+    string adminFeeType = 24;
+    double adminFee = 25;
+    double txnFee = 26;
+    int32 parentNftId = 27;
+    string editionTitle = 28;
+    string editionSold = 29;
+    string sellerId = 30;
+    string txnFeeType = 31;
+    string nftTitle = 32;
+    string description = 33;
+    int32 categoryId = 34;
+    int32 collection = 35;
+    string Image = 36;
+    double nftOriginalPrice = 37;
+    string orderId = 38;
+}
+
+message GetAllNFTUserItemReq {
+    int32 limit= 1;
+    int32 offset= 2;
+    string userId = 3;
+}
+message CreateRaffelReq {
+    int32 raffleId = 1;
+}
+ message CreateRaffelResp {
+    bool error= 1;
+    string message=2;
+ }
+  message GetRaffelByNftIdResp {
+    bool error= 1;
+    string message=2;
+    repeated raffelByNftId data=3;
+ }
+ 
+   message FindNFTbyIdForAdminResp {
+    bool error= 1;
+    string message=2;
+    NftByNftId data=3;
+ }
+ 
+ message raffelByNftId {
+    int32 nftId = 1;
+    int32 raffleId = 2;
+    bool status = 3;
+}
+ message NftByNftId {
+    string title = 1;
+}
+
+message RafflesWinners{
+    string userId = 1;
+    int32 nftId = 2;
+    int32 raffleId = 3;
+}
+
+message RafflesWinnerTransReq {
+    repeated RafflesWinners winners = 1;
+}
+
+message RafflesWinnerTransRes {
+    string message = 1;
+    bool error= 2;
+}
+message addCategoryReq {
+    string category_name = 1;
+    string category_image = 2;
+    bool is_featured = 3;
+}
+message addCategoryResp {
+    string message = 1;
+    bool error = 2;
+}
+
+message DeleteCategoryReq {
+    string id = 1;
+}
+message DeleteCategoryResp {
+    string message = 1;
+    bool error = 2;
+}
+
+message updateCategoryReq {
+    string category_name = 1;
+    string category_image = 2;
+    string id = 3;
+    bool is_featured = 4;
+}
+message updateCategoryResp {
+    string message = 1;
+    bool error = 2;
+}
+message getCategoryReq{
+    int32 limit= 1;
+    int32 offset= 2;
+}
+message getCategoryResp {
+    bool error= 1;
+    string message=2;
+    AllCategory data = 3;
+}
+message AllCategory{
+    int32 count = 1;
+    repeated SingleCategoryData rows = 2;
+}
+message SingleCategoryData {
+    int32 id = 1;
+    string category_name = 2;
+    string category_image = 3;
+    bool status = 4;
+    bool is_deleted = 5;
+    bool is_featured = 6;
+}
+message getCategoryByIdReq{
+    int32 id = 1;
+}
+
+message getCatogeryListForUserReq{
+}
+message getCatogeryListForUserResp{
+    repeated CatagoryDatas data = 1;
+}
+
+message getCatogeryListForNftReq{
+}
+message getCatogeryListForNftResp{
+    repeated CatagoryDatas data = 1;
+}
+message CatagoryDatas{
+    int32 id = 1;
+    string category_name = 2;
+    string category_image = 3;
+    bool status = 4;
+    bool is_deleted = 5;
+    bool is_featured = 6;
+}
+message getCategoryByIdResp{
+    bool error= 1;
+    string message=2;
+    SingleCategoryData data = 3;
+}
+
+
+message getNftReq {
+    int64 nftId = 1;
+}
+
+message getNftResp {
+    bool error= 1;
+    string message=2;
+    SingleSoldNFTItemData data = 3;
+}
+
+message getReportingAllListReq{
+    int32 limit = 1;
+    int32 offset = 2;
+}
+message getReportingAllListResp{
+    bool error = 1;
+    string message = 2;
+    getReportingAllList data = 3;
+}
+message getReportingAllList{
+    int32 count = 1;
+    repeated getReportingData rows = 2;
+}
+message getReportingData{
+    int32 nftReporting_Id = 1;
+    int32 nftId = 2;
+    string userId = 3;
+    string reason = 4;
+    string comment = 5;
+}
+message AddNFTReportingReq{
+    int32 nftId = 1;
+    string userId = 2;
+    string reason = 3;
+    string comment = 4;
+}
+message AddNFTReportingResp{
+    bool error = 1;
+    string message = 2;
+}
+message reportListingDetailsReq{
+    string nftId = 1;
+}
+message reportListingDetailsResp{
+    bool error = 1;
+    string message = 2;
+    repeated reportListingDetailsData data = 3;
+}
+message reportListingDetailsData{
+    string nftId = 1;
+    string title = 2;
+    string description = 3;
+    string logo = 4;
+    repeated reportListData reason = 5;
+}
+message reportListData {
+    string userId = 1;
+    string reason = 2;
+    string comment = 3;
+}
+message getAllCollectionReq{
+    int32 limit = 1;
+    int32 offset = 2;
+}
+message getAllCollectionResp {
+    bool error= 1;
+    string message=2;
+    int32 count = 3;
+    repeated GetAllCollectionData data = 4;
+}
+
+message GetAllCollectionData {
+    int32 collectionId = 1;
+    string name = 2;
+    string logo = 3;
+}
+
+message createBulkNFTResp {
+    bool error= 1;
+    string message=2;
+}
+
+message createBulkNFTReq {
+    string name = 1;
+    string description=2;
+    repeated NFTItemLogo logo = 3;
+    string banner = 4;
+    int64 royalty = 5;
+    int64 supply = 6;
+    int32 collectionId = 7;
+    string nftType = 8;
+    string blockChainName = 9;
+    string price = 10;
+    float minBidCost = 11;
+    string creator = 12;
+    int32 isActive = 13;
+    string auctionExpireDate = 14;
+    string fileType = 15;
+    int64 raffleId = 16;
+    NFTItemCreateLocation location = 17;
+    string watermarkUrl = 18;
+    string categoryId = 19;
+    int32 copies = 20;
+    repeated int32 extraoption = 21;
+}
+
+message createBulkLogo {
+
+}
+
+message NFTItemCreateLocation {
+    string city = 1;
+    string state = 2;
+    string country = 3;
+    double lat = 4;
+    double long = 5;
+}
+message NFTItemLogo {
+    string type = 1;
+    string url = 2;
+}
+message PurchasesListReq{
+    int32 limit = 1;
+    int32 offset = 2;
+    string userId = 3;
+}
+message PurchasesListResp {
+    bool error= 1;
+    string message=2;
+    repeated PurchasesListData data = 3;
+    int32 count = 4;
+}
+
+message PurchasesListData {
+    string paymentGateway= 1;
+    string creator=2;
+    int32 nftId=3;
+    string status=4;
+    int32 parentNftId=5;
+    double amount=6;
+    string currency=7;
+    string title=8;
+    int32 copies=9;
+    string fileType=10;
+    int32 isActive=11;
+    string logo=12;
+    string price=13;
+    string watermarkUrl=14;
+}
+
+message getUserCategoryDetailsReq{
+    repeated string container = 1;
+}
+message getUserCategoryDetailsResp{
+    string message = 1;
+    bool error = 2;
+    repeated getUserCategoryDetailsss data = 3;
+}
+message getUserCategoryDetailsss {
+    string id = 1;
+    string category_name = 2;
+    string category_image = 3;
+}
+message WithdrawNftListReq{
+    int32 limit = 1;
+    int32 offset = 2;
+}
+message WithdrawNftListResp {
+    bool error = 1;
+    string message = 2;
+    int32 count = 3;
+    repeated WithdrawNftListData data = 4;
+}
+
+message WithdrawNftListData {
+    int32 nftId = 1;
+    string nftTitle = 2;
+    string userId = 3;
+    string userAddress = 4;
+    int32 parentnftId = 5;
+    string logo = 6;
+    int32 status = 7;
+    string nftWithdrawId = 8;
+}
+message ApproveRejectWithrawlNftReq{
+    int32 nftId = 1;
+    int32 parentnftId = 2;
+    int32 status = 3;
+    string userId = 4;
+    string comment = 5;
+}
+message ApproveRejectWithrawlNftResp {
+    bool error = 1;
+    string message = 2;
+}
+
+message GetCollectionByOwnerIdReq {
+    string creatorId = 1;
+    int32 limit= 2;
+    int32 offset= 3;
+}
+
+message GetCollectionByOwnerIdRes {
+    bool error= 1;
+    string message=2;
+    AllCollections data = 3;
+} 
+
+
+message createCategoryByAdminReq {
+ 
+    string category_name =1;
+    string  category_image =2;
+    bool is_featured =3;
+ 
+}
+
+message createCategoryByAdminRes{
+    string message = 1;
+    bool error = 2;
+}
+
+
+message updateCategoryByAdminReq {
+    string category_name=1;
+    string category_image=2;
+    string id=3;
+    bool is_featured=4;
+}
+
+message updateCategoryByAdminRes{
+    string message = 1;
+    bool error = 2;
+}
+
+
+message deleteCategoryByAdminReq {
+    int32 status=1;
+    string id=2;
+    
+}
+
+message deleteCategoryByAdminRes{
+    string message = 1;
+    bool error = 2;
+}
+
+
+message getcategoryListReq{
+    int32 limit = 1;
+    int32 offset = 2;
+    bool isAdmin = 3;
+    string filter = 4;
+    bool setting = 5;
+}
+message getcategoryListRes{
+    string message = 1;
+    bool error = 2;
+    repeated getcategoryData data = 3;
+    int32 count = 4;
+}
+message getcategoryData {
+    string CategoryId = 1;
+    string category_name = 2;
+    string category_image=3;
+    string status = 4;
+    string is_deleted = 5;
+    string is_featured = 6;
+    string createdAt = 7;
+    bool is_admin = 8;
+  
+}
+
+
+message getCategoryDetailsReq{
+    string id = 1;
+}
+message getCategoryDetailsRes{
+    string message = 1;
+    bool error = 2;
+    repeated getCategoryDetail data = 3;
+    int32 count = 4;
+}
+
+message getCategoryDetail {
+    string CategoryId = 1;
+    string category_name = 2;
+    string category_image=3;
+    string status = 4;
+    string is_deleted = 5;
+    string is_featured = 6;
+    string createdAt = 7;
+}
+
+message PostCreateReq {
+    string user_Id = 1;
+    string nft_id=2;
+    string content = 3;
+}
+
+message PostCreateResp {
+    bool error= 1;
+    string message=2;
+    SinglePostData data = 3;
+}
+
+message SinglePostData {
+    string user_Id = 1;
+    string nft_id=2;
+    string content = 3;
+    bool is_active = 4;
+    bool is_hidden = 5;
+}
+
+
+message NFTItemCreateReq {
+    string name = 1;
+    string description=2;
+    string logo = 3;
+    int64 supply = 4;
+    string collectionId = 5;
+    string creator = 6;
+    string fileType = 7;
+    repeated nftProperties properties = 8;
+    bool sensitiveContent = 9;
+    string tokenUri = 10;
+    string nftAddress = 11;
+}
+
+message nftProperties{
+    string id = 1;
+    string nftId = 2;
+    string propertyType = 3;
+    string propertyName = 4;
+}
+
+message NFTItemCreateResp {
+    bool error= 1;
+    string message=2;
+    nftCreateResponse data= 3;
+}
+
+message nftCreateResponse{
+    int64 counterId = 1;
+    int64 tokenId = 2;
+}
+
+message GetCollectionCountReq{
+
+}
+
+message GetCollectionCountRes{
+    int32 count = 1;
+}
+
+message getDashBoardReq {
+    string sortBy = 1;
+}
+
+// message getDashBoardRes {
+//     bool error = 1;
+//     string message = 2;
+//     map<string,string> dashBoardAmount = 3;
+//     // string totalAmount = 4;
+//     // string increasePercentage = 5;
+// }
+
+
+message getDashBoardRes {
+    bool error = 1;
+    string message = 2;
+    dashBoardAmount dashBoardAmount = 4;
+}
+
+message dashBoardAmount {
+    week week  = 1;
+    month month = 2;
+    year year = 3;
+}
+
+message week {
+    repeated dashBordData  data = 1;
+    string totalAmount = 2;
+    string increasePercentage = 3;
+}
+
+message month {
+    repeated dashBordData  data = 1;
+    string totalAmount = 2;
+    string increasePercentage = 3;
+}
+
+message year{
+    repeated yearData  data = 1;
+    string totalAmount = 2;
+    string increasePercentage = 3;
+}
+
+message dashBordData {
+    string date = 1;
+    string day = 2;
+    string totalAmount = 3;
+}
+
+
+message yearData {
+    string firstDate = 1;
+    string lastDate = 2;
+    string month = 3;
+    string totalAmount = 4;
+}
+
+message ListNftReq {
+    string nftType=1;
+    int32 duration=2;
+    bool isListed=3;
+    string nftId = 4;
+    string creatorId = 5;
+    int32 quantity = 6;
+    string fromDate = 7;
+    string toDate = 8;
+    string saleType =9 ;
+    double price = 10;
+    string walletAddress = 11;
+}
+
+message ListNftRes{
+    string message = 1;
+    bool error = 2;
+    listedData data = 3;
+}
+message listedData{
+    string listingId = 1;
+    string counterId = 2;
+    }
+message getNftDetailsReq{
+    string id = 1;
+    string token = 2;
+    string buyerToken = 3;
+}
+message getNftDetailsRes{
+    string message = 1;
+    bool error = 2;
+    repeated SingleNFTItemData data = 3;
+    int32 count = 4;
+}
+
+message unListNftReq {
+    string nftId=1;
+    string listedId = 2;
+    string creatorId = 3;
+}
+
+message unListNftRes{
+    string message = 1;
+    bool error = 2;
+}
+message GetAllUnListCollectionsReq {
+    int32 limit= 1;
+    int32 offset= 2;
+    string searchText = 3;
+    string sortBy = 4;
+    bool fromAdmin = 5;
+}
+
+message GetAllUnListCollectionsResp {
+    bool error= 1;
+    string message=2;
+    AllCollections data = 3;
+}
+
+message getNftListReq{
+    int32 limit = 1;
+    int32 offset = 2;
+    string searchText = 3;
+    string sortBy = 4;
+    bool fromAdmin = 5;
+    string userId = 6;
+}
+
+message getNftListRes{
+    string message = 1;
+    bool error = 2;
+    repeated getNftData data = 3;
+    int32 count = 4;
+}
+message getNftData {
+    string nftId = 1;
+    string parentId = 2;
+    string nftAddress=3;
+    string categoryId = 4;
+    string title = 5;
+    string fileType = 6;
+    string fileHash = 7;
+    string externalLink = 8;
+    string description=9;
+    string tokenUri = 10;
+    string supply = 11;
+    string royalty = 12;
+    string networkId = 13;
+    string nftType = 14;
+    string price=15;
+    string minBidCost =16;
+    string currency = 17;
+    string status = 18;
+    string tokenId = 19;
+    string copies = 20;
+    string owner=21;
+    string creator =22;
+    string collectionId = 23;
+    string txid =24;
+    string viewed=25;
+    string isActive =26;
+    string logo =27;
+    string banner =28;
+    string auctionExpireDate =29;
+    string watermarkUrl =30;
+    string blockChainName=31;
+    string nftEdition =32;
+    string isSlod =33;
+    string isIpfs =34;
+    string isMint =35;
+    string isAddedToSecondary =36;
+    string isFeatured=37;
+    string saleCount =38;
+    string isWithdraw =39;
+    string isListed =40;
+    string createdAt =41;
+    string collectionName = 42;
+    string profileImage = 43;
+    string creatorId = 44;
+    string collectionLogo = 45;
+    string collectionBannerImage =46;
+    string duration = 47;
+    string salePrice = 48;
+    string expiredAt = 49;
+    bool isFavourite = 50;
+}
+
+message GetCollectionUrlReq {
+    string collectionUrl = 1;
+}
+
+message GetCollectionUrlResp {
+    bool error= 1;
+    string message=2;
+    SingleCollectionData data = 3;
+}
+
+service NFTServices {
+    rpc CreateCollections (CollectionsCreateReq) returns (CollectionsCreateResp) {};
+    rpc GetAllCollections (GetAllCollectionsReq) returns (GetAllCollectionsResp) {};
+    rpc GetCollectionsById (GetCollectionIdReq) returns (GetCollectionIdResp) {};
+    rpc GetCollectionByOwnerId (GetCollectionByOwnerIdReq) returns (GetCollectionByOwnerIdRes) {};
+    rpc GetCollectionsByName (GetCollectionNameReq) returns (GetCollectionIdResp) {};
+    rpc UpdateCollectionsById (UpdateCollectionIdReq) returns (GetCollectionIdResp) {};
+    rpc GettingNFTCollectionItem (GettingNFTCollectionItemReq) returns (GettingNFTCollectionItemResp) {};
+    rpc GettingNFTCollectionItems (GettingNFTCollectionItemsReq) returns (GettingNFTCollectionItemsResp) {};
+    rpc GettingUnsoldNFTCollectionItems (GettingUnsoldNFTCollectionItemsReq) returns (GettingUnsoldNFTCollectionItemsResp) {};
+    rpc CreateBulkNFTItem (NFTItemBulkCreateReq) returns (NFTItemBulkCreateResp) {};
+    rpc GetAllNFTItem (getNftListReq) returns (getNftListRes) {};
+    rpc GetNFTItemByCollectionId (GetNFTItemByCollectionIdReq) returns (GetNFTItemByCollectionIdResp) {};
+    rpc UpdateNFTStatus (UpdateNFTReq) returns (UpdateNFTResp) {};
+    rpc UpdateNFTStatuss (UpdatedNFTReq) returns (UpdatedNFTResp) {};
+    rpc PurchaseNFT (PurchaseNFTReq) returns (PurchaseNFTResp) {};
+    rpc GetNFTByUserId (GetNFTByUserReq) returns (GetNFTByUserResp) {};
+    rpc PurchaseNFTStatus (PurchaseNFTStatusReq) returns (PurchaseNFTResp) {};
+    rpc UpdateNFTTransactionStatus (UpdateNFTTransactionStatusReq) returns (UpdateNFTTransactionStatusRes) {};
+    rpc SoldNFTList (GetAllNFTItemReq) returns (GetAllSoldNFTItemResp) {};
+    rpc userBidHistroy (GetAllNFTHistoryReq) returns (GetAllNFTHistoryResp) {};
+    rpc GetAllNFTItemByUser (GetAllNFTUserItemReq) returns (GetAllNFTItemResp) {};
+    rpc CreateRaffel (CreateRaffelReq) returns (CreateRaffelResp) {};
+    rpc getRaffelByNftId (GetRaffelByNftIdReq) returns (GetRaffelByNftIdResp) {};
+    rpc findNFTbyIdForAdmin (FindNFTbyIdForAdminReq) returns (FindNFTbyIdForAdminResp) {};
+    rpc createRafflesWinnerTrans (RafflesWinnerTransReq) returns (RafflesWinnerTransRes) {};
+    rpc addCategory (addCategoryReq) returns (addCategoryResp) {}
+    rpc DeleteCategory (DeleteCategoryReq) returns (DeleteCategoryResp) {}
+    rpc updateCategory (updateCategoryReq) returns (updateCategoryResp) {}
+    rpc getCategory (getCategoryReq) returns (getCategoryResp) {}
+    rpc getCategoryById (getCategoryByIdReq) returns (getCategoryByIdResp) {}
+    rpc getCatogeryListForUser (getCatogeryListForUserReq) returns (getCatogeryListForUserResp) {}
+    rpc getCatogeryListForNft (getCatogeryListForNftReq) returns (getCatogeryListForNftResp) {}
+    rpc getReportingAllList (getReportingAllListReq) returns (getReportingAllListResp) {}
+    rpc AddNFTReporting (AddNFTReportingReq) returns (AddNFTReportingResp) {}
+    rpc reportListingDetails (reportListingDetailsReq) returns (reportListingDetailsResp) {}
+    rpc getAllCollection (getAllCollectionReq) returns (getAllCollectionResp) {}
+    rpc CreateBulkNFT (createBulkNFTReq) returns (createBulkNFTResp) {};
+    rpc GetPurchasesList (PurchasesListReq) returns (PurchasesListResp) {};
+    rpc CartCheckout (CartCheckoutReq) returns (PurchaseNFTResp) {};
+    rpc getUserCategoryDetails (getUserCategoryDetailsReq) returns (getUserCategoryDetailsResp) {};
+    rpc getWithdrawNftList (WithdrawNftListReq) returns (WithdrawNftListResp) {};
+    rpc SubmitApproveRejectWithrawlNft (ApproveRejectWithrawlNftReq) returns (ApproveRejectWithrawlNftResp) {};
+    rpc createCategoryByAdmin (createCategoryByAdminReq) returns (createCategoryByAdminRes) {};
+    rpc updateCategoryByAdmin (updateCategoryByAdminReq) returns (updateCategoryByAdminRes) {};
+    rpc deleteCategoryByAdmin (deleteCategoryByAdminReq) returns (deleteCategoryByAdminRes) {};
+    rpc getcategoryList (getcategoryListReq) returns (getcategoryListRes) {}
+    rpc getCategoryDetails (getCategoryDetailsReq) returns (getCategoryDetailsRes) {};
+    rpc CreatePosts (PostCreateReq) returns (PostCreateResp) {};
+    rpc CreateNFTItem (NFTItemCreateReq) returns (NFTItemCreateResp) {};
+    rpc GetCollectionCount (GetCollectionCountReq) returns (GetCollectionCountRes) {};
+    rpc GetDashBoard (getDashBoardReq) returns (getDashBoardRes) {};
+    rpc ListedNft (ListNftReq) returns (ListNftRes) {};
+    rpc getNftDetails (getNftDetailsReq) returns (getNftDetailsRes) {};
+    rpc unListNft (unListNftReq) returns (unListNftRes) {};
+    rpc GetAllUnListCollections (GetAllUnListCollectionsReq) returns (GetAllUnListCollectionsResp) {};
+    rpc GetCollectionByUrl (GetCollectionUrlReq) returns (GetCollectionUrlResp) {};
+}

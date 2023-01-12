@@ -1,0 +1,7 @@
+File from: [https://stage-nft-collection.s3.ap-south-1.amazonaws.com/collection/d4963145-2854-40b7-b880-feae92d65fdb-Screenshot%20from%202021-09-14%2011-40-37.png]
+
+File to: [/home/user/Projects/admin-service/server/api/controllers/fileController/images/d4963145-2854-40b7-b880-feae92d65fdb-Screenshot%20from%202021-09-14%2011-40-37.png]
+
+Compression algorithm: [-]
+
+Description: File does not exist!

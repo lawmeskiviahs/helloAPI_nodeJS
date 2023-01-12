@@ -1,0 +1,7 @@
+File from: [https://stage-nft-collection.s3.ap-south-1.amazonaws.com/collection/933c5abf-56c2-40e4-ac38-ec80d9c30951-khaby-really.gif]
+
+File to: [/home/user/Projects/admin-service/server/api/controllers/fileController/images933c5abf-56c2-40e4-ac38-ec80d9c30951-khaby-really.gif]
+
+Compression algorithm: [-]
+
+Description: File does not exist!

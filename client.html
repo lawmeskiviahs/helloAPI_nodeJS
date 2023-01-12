@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="apple-mobile-web-app-capable" />
+  <script>
+    window.onload = function () {
+      if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        window.location = "https://stage-api.centuriongame.in/user/static/apple-app-site-association"; // Your app's URL to open the app and then pageID to open specific page.
+        setTimeout(function () {
+          window.location.href =
+            "https://apps.apple.com/in/app/facebook/id284882215"; //'YOUR_APP_STORE_LINK';
+        }, 5000);
+      } else {
+        // Android
+        console.log("android")
+      }
+
+    };
+  </script>
+</head>
+
+<body>
+  <img src="../assets/yourAppIcon.png" style="width: 35%; border-radius: 15%; margin-left: 34%; margin-top: 48%"
+    alt="" />
+  <br />
+  <a href="https://apps.apple.com/in/app/facebook/id284882215" style="
+        display: inline-block;
+        overflow: hidden;
+        width: 65%;
+        background-image: url('../assets/icon.svg');
+        background-repeat: no-repeat;
+        height: 111px;
+        background-size: contain;
+        margin-left: 32%;
+        margin-top: 26%;
+      "></a>
+</body>
+
+</html>
